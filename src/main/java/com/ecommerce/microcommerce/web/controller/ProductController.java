@@ -115,16 +115,19 @@ public class ProductController {
                 .stream()
                 .collect(Collectors.toMap(Product::toString, p -> p.getPrix() - p.getPrixAchat()));
     }
-    //Pour les tests
+
+    //Pour le trie
+    @RequestMapping(value = "/Produits/Trie", method = RequestMethod.GET)
+    public List<Product>  trierProduitsParOrdreAlphabetique() {
+
+        return productDao.findAllByOrderByNomAsc();
+    }
+
+    //Pour les test
     @GetMapping(value = "test/produits/{prix}")
     public List<Product>  testeDeRequetes(@PathVariable int prix) {
 
         return productDao.chercherUnProduitCher(400);
     }
-
-
-
-
-
 
 }
